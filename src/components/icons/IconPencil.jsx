@@ -1,8 +1,10 @@
-const IconBook = ({ width, height }) => {
+import React from 'react'
+
+const IconPencil = ({ width, height }) => {
     return (
         <svg
             xmlns='http://www.w3.org/2000/svg'
-            className='icon icon-tabler icon-tabler-book-2'
+            className='icon icon-tabler icon-tabler-pencil'
             width={width}
             height={height}
             viewBox='0 0 24 24'
@@ -17,11 +19,10 @@ const IconBook = ({ width, height }) => {
                 d='M0 0h24v24H0z'
                 fill='none'
             />
-            <path d='M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12z' />
-            <path d='M19 16h-12a2 2 0 0 0 -2 2' />
-            <path d='M9 8h6' />
+            <path d='M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4' />
+            <path d='M13.5 6.5l4 4' />
         </svg>
     )
 }
 
-export default IconBook
+export default IconPencil

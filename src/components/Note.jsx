@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import IconMenuPoint from './icons/IconMenuPoint'
 
-function Note({ title, id, content, deleteNote, category }) {
+function Note({ title, id, content, deleteNote, category, archive }) {
     const [isHovered, setIsHovered] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
@@ -9,7 +9,6 @@ function Note({ title, id, content, deleteNote, category }) {
     const [newTitle, setNewTitle] = useState(title)
     const [selectedCategory, setSelectedCategory] = useState(0)
     const [archived, setArchived] = useState(false)
-    const [archiving, setArchiving] = useState(false)
 
     const textareaRef = useRef(null)
 
@@ -47,13 +46,11 @@ function Note({ title, id, content, deleteNote, category }) {
     }
 
     const handleArchivar = async () => {
-        setArchiving(true)
-
         const updateNote = {
             name: newTitle,
             note: editedContent,
             categoryId: selectedCategory === 0 ? null : selectedCategory,
-            archive: true
+            archive: !archive
         }
 
         try {
@@ -66,11 +63,9 @@ function Note({ title, id, content, deleteNote, category }) {
                 }
             })
 
-            setArchived(true)
+            setArchived(!archive)
         } catch (error) {
             console.error('Error archiving note:', error)
-        } finally {
-            setArchiving(false)
         }
     }
 
@@ -197,9 +192,8 @@ function Note({ title, id, content, deleteNote, category }) {
                                 <button
                                     className='p-1 hover:bg-gray-200 w-full'
                                     onClick={handleArchivar}
-                                    disabled={archiving}
                                 >
-                                    Archivar
+                                    {!archive ? 'Archivar' : 'Desarchivar'}
                                 </button>
                             </div>
                         )}

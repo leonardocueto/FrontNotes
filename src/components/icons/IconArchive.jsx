@@ -1,8 +1,10 @@
-const IconBook = ({ width, height }) => {
+import React from 'react'
+
+function IconArchive({ width, height }) {
     return (
         <svg
             xmlns='http://www.w3.org/2000/svg'
-            className='icon icon-tabler icon-tabler-book-2'
+            className='icon icon-tabler icon-tabler-archive'
             width={width}
             height={height}
             viewBox='0 0 24 24'
@@ -17,11 +19,11 @@ const IconBook = ({ width, height }) => {
                 d='M0 0h24v24H0z'
                 fill='none'
             />
-            <path d='M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12z' />
-            <path d='M19 16h-12a2 2 0 0 0 -2 2' />
-            <path d='M9 8h6' />
+            <path d='M3 4m0 2a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v0a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2z' />
+            <path d='M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10' />
+            <path d='M10 12l4 0' />
         </svg>
     )
 }
 
-export default IconBook
+export default IconArchive
