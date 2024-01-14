@@ -4,16 +4,19 @@ import ListNotes from './components/ListNotes'
 import NewNote from './components/NewNote'
 import Note from './components/Note'
 import ModalCategory from './components/ModalCategory'
+import IconExistNotes from './components/icons/IconExistNotes'
+import IconBook from './components/icons/IconBook'
 
 function App() {
     const [notes, setNotes] = useState([])
     const [category, setCategory] = useState([])
     const [isModalOpen, setIsModalOpen] = useState(false)
+    const [showArchived, setShowArchived] = useState(false)
 
     const getNotes = async () => {
         try {
             const res = await fetch(
-                'http://localhost:3000/api/notes?archive=false'
+                `http://localhost:3000/api/notes?archive=${showArchived}`
             )
 
             if (!res.ok) {
@@ -21,10 +24,10 @@ function App() {
             }
 
             const data = await res.json()
-            const notesWitoutArchive = data.filter(
-                noteWithouthArchive => noteWithouthArchive.archive !== true
-            )
-            setNotes(notesWitoutArchive)
+            const filteredNotes = showArchived
+                ? data
+                : data.filter(note => !note.archive)
+            setNotes(filteredNotes)
         } catch (error) {
             console.error('Error:', error.message)
         }
@@ -56,7 +59,7 @@ function App() {
     useEffect(() => {
         getNotes()
         getCategory()
-    }, [notes])
+    }, [showArchived, category])
     return (
         <>
             <div className='h-screen flex flex-col'>
@@ -70,84 +73,36 @@ function App() {
                 <div className='flex flex-1 bg-gray-50 overflow-hidden'>
                     <aside className='w-64 bg-gray-100  relative'>
                         <button
-                            className=' w-full p-4 rounded-r-full hover:bg-gray-200 flex items-center justify-stretch'
-                            onClick={toggleModal}
+                            className={`w-full p-4 rounded-r-full   ${
+                                showArchived === false
+                                    ? 'bg-blue-100 hover:bg-none'
+                                    : 'hover:bg-gray-200'
+                            } flex items-center justify-stretch`}
+                            onClick={() => {
+                                setShowArchived(false)
+                            }}
                         >
-                            <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                className='icon icon-tabler icon-tabler-book-2'
-                                width='35'
-                                height='35'
-                                viewBox='0 0 24 24'
-                                strokeWidth='1.5'
-                                stroke='#2c3e50'
-                                fill='none'
-                                strokeLinecap='round'
-                                strokeLinejoin='round'
-                            >
-                                <path
-                                    stroke='none'
-                                    d='M0 0h24v24H0z'
-                                    fill='none'
-                                />
-                                <path d='M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12z' />
-                                <path d='M19 16h-12a2 2 0 0 0 -2 2' />
-                                <path d='M9 8h6' />
-                            </svg>
+                            <IconBook />
                             <span className='pl-6'>Notes</span>
                         </button>
                         <button
                             className=' w-full p-4 rounded-r-full hover:bg-gray-200 flex items-center justify-stretch'
                             onClick={toggleModal}
                         >
-                            <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                className='icon icon-tabler icon-tabler-book-2'
-                                width='35'
-                                height='35'
-                                viewBox='0 0 24 24'
-                                strokeWidth='1.5'
-                                stroke='#2c3e50'
-                                fill='none'
-                                strokeLinecap='round'
-                                strokeLinejoin='round'
-                            >
-                                <path
-                                    stroke='none'
-                                    d='M0 0h24v24H0z'
-                                    fill='none'
-                                />
-                                <path d='M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12z' />
-                                <path d='M19 16h-12a2 2 0 0 0 -2 2' />
-                                <path d='M9 8h6' />
-                            </svg>
+                            <IconBook />
                             <span className='pl-6'>Category</span>
                         </button>
                         <button
-                            className=' w-full p-4 rounded-r-full hover:bg-gray-200 flex items-center justify-stretch'
-                            onClick={toggleModal}
+                            className={`w-full p-4 rounded-r-full flex items-center justify-stretch ${
+                                showArchived === true
+                                    ? 'bg-blue-100 hover:bg-none'
+                                    : 'hover:bg-gray-200'
+                            }`}
+                            onClick={() => {
+                                setShowArchived(true)
+                            }}
                         >
-                            <svg
-                                xmlns='http://www.w3.org/2000/svg'
-                                className='icon icon-tabler icon-tabler-book-2'
-                                width='35'
-                                height='35'
-                                viewBox='0 0 24 24'
-                                strokeWidth='1.5'
-                                stroke='#2c3e50'
-                                fill='none'
-                                strokeLinecap='round'
-                                strokeLinejoin='round'
-                            >
-                                <path
-                                    stroke='none'
-                                    d='M0 0h24v24H0z'
-                                    fill='none'
-                                />
-                                <path d='M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12z' />
-                                <path d='M19 16h-12a2 2 0 0 0 -2 2' />
-                                <path d='M9 8h6' />
-                            </svg>
+                            <IconBook />
                             <span className='pl-6'>Archived</span>
                         </button>
                         {isModalOpen && (
@@ -179,30 +134,7 @@ function App() {
                             ) : (
                                 <div className='flex flex-col justify-center items-center mt-20'>
                                     <div>
-                                        <svg
-                                            xmlns='http://www.w3.org/2000/svg'
-                                            className='icon icon-tabler icon-tabler-zoom-scan'
-                                            width='100'
-                                            height='100'
-                                            viewBox='0 0 24 24'
-                                            strokeWidth='1.5'
-                                            stroke='#2c3e50'
-                                            fill='none'
-                                            strokeLinecap='round'
-                                            strokeLinejoin='round'
-                                        >
-                                            <path
-                                                stroke='none'
-                                                d='M0 0h24v24H0z'
-                                                fill='none'
-                                            />
-                                            <path d='M4 8v-2a2 2 0 0 1 2 -2h2' />
-                                            <path d='M4 16v2a2 2 0 0 0 2 2h2' />
-                                            <path d='M16 4h2a2 2 0 0 1 2 2v2' />
-                                            <path d='M16 20h2a2 2 0 0 0 2 -2v-2' />
-                                            <path d='M8 11a3 3 0 1 0 6 0a3 3 0 0 0 -6 0' />
-                                            <path d='M16 16l-2.5 -2.5' />
-                                        </svg>
+                                        <IconExistNotes />
                                     </div>
                                     <p className='text-2xl font-semibold'>
                                         no existen notas
