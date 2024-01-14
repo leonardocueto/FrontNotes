@@ -11,9 +11,23 @@ function App() {
     const [isModalOpen, setIsModalOpen] = useState(false)
 
     const getNotes = async () => {
-        const res = await fetch('http://localhost:3000/api/notes')
-        const data = await res.json()
-        setNotes(data)
+        try {
+            const res = await fetch(
+                'http://localhost:3000/api/notes?archive=false'
+            )
+
+            if (!res.ok) {
+                throw new Error('Error al obtener las notas')
+            }
+
+            const data = await res.json()
+            const notesWitoutArchive = data.filter(
+                noteWithouthArchive => noteWithouthArchive.archive !== true
+            )
+            setNotes(notesWitoutArchive)
+        } catch (error) {
+            console.error('Error:', error.message)
+        }
     }
     const getCategory = async () => {
         const res = await fetch('http://localhost:3000/api/categories')
@@ -80,7 +94,61 @@ function App() {
                                 <path d='M19 16h-12a2 2 0 0 0 -2 2' />
                                 <path d='M9 8h6' />
                             </svg>
+                            <span className='pl-6'>Notes</span>
+                        </button>
+                        <button
+                            className=' w-full p-4 rounded-r-full hover:bg-gray-200 flex items-center justify-stretch'
+                            onClick={toggleModal}
+                        >
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                className='icon icon-tabler icon-tabler-book-2'
+                                width='35'
+                                height='35'
+                                viewBox='0 0 24 24'
+                                strokeWidth='1.5'
+                                stroke='#2c3e50'
+                                fill='none'
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                            >
+                                <path
+                                    stroke='none'
+                                    d='M0 0h24v24H0z'
+                                    fill='none'
+                                />
+                                <path d='M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12z' />
+                                <path d='M19 16h-12a2 2 0 0 0 -2 2' />
+                                <path d='M9 8h6' />
+                            </svg>
                             <span className='pl-6'>Category</span>
+                        </button>
+                        <button
+                            className=' w-full p-4 rounded-r-full hover:bg-gray-200 flex items-center justify-stretch'
+                            onClick={toggleModal}
+                        >
+                            <svg
+                                xmlns='http://www.w3.org/2000/svg'
+                                className='icon icon-tabler icon-tabler-book-2'
+                                width='35'
+                                height='35'
+                                viewBox='0 0 24 24'
+                                strokeWidth='1.5'
+                                stroke='#2c3e50'
+                                fill='none'
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                            >
+                                <path
+                                    stroke='none'
+                                    d='M0 0h24v24H0z'
+                                    fill='none'
+                                />
+                                <path d='M19 4v16h-12a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12z' />
+                                <path d='M19 16h-12a2 2 0 0 0 -2 2' />
+                                <path d='M9 8h6' />
+                            </svg>
+                            <span className='pl-6'>Archived</span>
                         </button>
                         {isModalOpen && (
                             <ModalCategory
@@ -104,6 +172,7 @@ function App() {
                                             content={note}
                                             id={id}
                                             deleteNote={deleteNote}
+                                            category={category}
                                         />
                                     ))}
                                 </ListNotes>

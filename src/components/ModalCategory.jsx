@@ -1,14 +1,23 @@
-import { useRef } from 'react'
+import { useState, useRef } from 'react'
 
 const ModalCategory = ({ onClose, category, deleteCategory }) => {
+    const [editingCategoryId, setEditingCategoryId] = useState(null)
     const categoryInputRef = useRef()
 
-    const handleSubmit = e => {
+    const handleSubmit = async e => {
         e.preventDefault()
         const name = categoryInputRef.current.value
-        saveCategory(name)
+
+        if (editingCategoryId !== null) {
+            await updateCategory(editingCategoryId, name)
+            setEditingCategoryId(null)
+        } else {
+            await saveCategory(name)
+        }
+
         categoryInputRef.current.value = ''
     }
+
     const saveCategory = async name => {
         await fetch('http://localhost:3000/api/categories', {
             method: 'POST',
@@ -20,6 +29,23 @@ const ModalCategory = ({ onClose, category, deleteCategory }) => {
         })
     }
 
+    const updateCategory = async (categoryId, name) => {
+        await fetch(`http://localhost:3000/api/categories/${categoryId}`, {
+            method: 'PUT',
+            mode: 'cors',
+            body: JSON.stringify({ name }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+    }
+
+    const handleEditClick = categoryId => {
+        setEditingCategoryId(categoryId)
+        const categoryToEdit = category.find(c => c.id === categoryId)
+        categoryInputRef.current.value = categoryToEdit.name
+    }
+
     return (
         <div className='fixed inset-0 flex items-center justify-center'>
             <div
@@ -28,7 +54,11 @@ const ModalCategory = ({ onClose, category, deleteCategory }) => {
             ></div>
             <div className='bg-white p-8 rounded-lg z-10'>
                 <form onSubmit={handleSubmit}>
-                    <h2 className='text-xl font-semibold mb-4'>New category</h2>
+                    <h2 className='text-xl font-semibold mb-4'>
+                        {editingCategoryId !== null
+                            ? 'Edit category'
+                            : 'New category'}
+                    </h2>
                     <div className='mb-4'>
                         <input
                             type='text'
@@ -41,14 +71,13 @@ const ModalCategory = ({ onClose, category, deleteCategory }) => {
                         <button
                             type='submit'
                             className='bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600'
-                            onClick={handleSubmit}
                         >
-                            Add
+                            {editingCategoryId !== null ? 'Update' : 'Add'}
                         </button>
                     </div>
                 </form>
                 <div>
-                    <ul className=' p-2'>
+                    <ul className='p-2'>
                         {category.map(category => (
                             <li
                                 key={category.id}
@@ -87,7 +116,8 @@ const ModalCategory = ({ onClose, category, deleteCategory }) => {
                                 </span>
                                 <button
                                     name='edit'
-                                    className=' hover:bg-gray-100 px-2 py-1 rounded-md '
+                                    className='hover:bg-gray-100 px-2 py-1 rounded-md'
+                                    onClick={() => handleEditClick(category.id)}
                                 >
                                     <svg
                                         xmlns='http://www.w3.org/2000/svg'

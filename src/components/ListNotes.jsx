@@ -1,5 +1,9 @@
 function ListNotes({ children }) {
-    return <ol className='grid justify-center gap-2'>{children}</ol>
+    return (
+        <ol className='flex flex-col items-center justify-center gap-2'>
+            {children}
+        </ol>
+    )
 }
 
 export default ListNotes
