@@ -28,7 +28,7 @@ const Buscador = ({ onSearch }) => {
             <input
                 type='text'
                 placeholder='Buscar por título'
-                className='w-full rounded-md p-2 focus:border-none outline-none border-none focus:outline-none'
+                className='w-full rounded-md p-2 shadow-md focus:border-none outline-none border-none focus:outline-none'
                 value={search}
                 onChange={e => handleSearch(e)}
             />

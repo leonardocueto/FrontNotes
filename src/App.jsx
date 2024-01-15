@@ -97,7 +97,7 @@ function App() {
                         <div>
                             {category.length > 0 && (
                                 <select
-                                    className='ml-1 px-3 py-2 border-none rounded w-full'
+                                    className='ml-1 px-3 py-2 border-none rounded w-full shadow-md'
                                     name='filterCategory'
                                     value={selectedCategoryId}
                                     onChange={e =>
