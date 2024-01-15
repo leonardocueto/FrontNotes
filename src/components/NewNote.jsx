@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function NewNote({ category }) {
+function NewNote({ category, url }) {
     const [note, setNote] = useState({
         name: '',
         note: '',
@@ -18,7 +18,7 @@ function NewNote({ category }) {
     }
 
     const saveNote = async () => {
-        await fetch('http://localhost:3000/api/notes', {
+        await fetch(url, {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify(note),

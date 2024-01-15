@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import IconTrash from './icons/IconTrash'
 import IconPencil from './icons/IconPencil'
 
-const ModalCategory = ({ onClose, category, deleteCategory }) => {
+const ModalCategory = ({ onClose, category, deleteCategory, url }) => {
     const [editingCategoryId, setEditingCategoryId] = useState(null)
     const categoryInputRef = useRef()
 
@@ -21,7 +21,7 @@ const ModalCategory = ({ onClose, category, deleteCategory }) => {
     }
 
     const saveCategory = async name => {
-        await fetch('http://localhost:3000/api/categories', {
+        await fetch(url, {
             method: 'POST',
             mode: 'cors',
             body: JSON.stringify({ name }),
@@ -32,7 +32,7 @@ const ModalCategory = ({ onClose, category, deleteCategory }) => {
     }
 
     const updateCategory = async (categoryId, name) => {
-        await fetch(`http://localhost:3000/api/categories/${categoryId}`, {
+        await fetch(`${url}/${categoryId}`, {
             method: 'PUT',
             mode: 'cors',
             body: JSON.stringify({ name }),

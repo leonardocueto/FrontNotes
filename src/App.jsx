@@ -18,9 +18,11 @@ function App() {
     const [selectedCategoryId, setSelectedCategoryId] = useState(0)
     const [search, setSearch] = useState('')
 
+    const URLNOTES = 'https://backnotes-c1o6.onrender.com/api/notes'
+    const URLCATEGORIES = 'https://backnotes-c1o6.onrender.com/api/categories'
     const getNotes = async () => {
         try {
-            const res = await fetch('http://localhost:3000/api/notes')
+            const res = await fetch(URLNOTES)
 
             if (!res.ok) {
                 throw new Error('Error al obtener las notas')
@@ -46,20 +48,20 @@ function App() {
         }
     }
     const getCategory = async () => {
-        const res = await fetch('http://localhost:3000/api/categories')
+        const res = await fetch(URLCATEGORIES)
         const data = await res.json()
         setCategory(data)
     }
 
     const deleteNote = async id => {
-        await fetch(`http://localhost:3000/api/notes/${id}`, {
+        await fetch(`${URLNOTES}/${id}`, {
             method: 'DELETE',
             mode: 'cors'
         })
     }
 
     const deleteCategory = async id => {
-        await fetch(`http://localhost:3000/api/categories/${id}`, {
+        await fetch(`${URLCATEGORIES}/${id}`, {
             method: 'DELETE',
             mode: 'cors'
         })
@@ -173,12 +175,16 @@ function App() {
                                 onClose={toggleModal}
                                 category={category}
                                 deleteCategory={deleteCategory}
+                                url={URLCATEGORIES}
                             />
                         )}
                     </aside>
                     <main className='flex-1  gap-2 rounded-sm overflow-y-auto'>
                         <div className='flex flex-col items-center justify-center'>
-                            <NewNote category={category} />
+                            <NewNote
+                                url={URLNOTES}
+                                category={category}
+                            />
                         </div>
                         <div className='mx-10'>
                             {notes.length > 0 ? (
@@ -193,6 +199,7 @@ function App() {
                                                 deleteNote={deleteNote}
                                                 archive={archive}
                                                 category={category}
+                                                url={URLNOTES}
                                             />
                                         )
                                     )}

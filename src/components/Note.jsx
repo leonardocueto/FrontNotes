@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import IconMenuPoint from './icons/IconMenuPoint'
 
-function Note({ title, id, content, deleteNote, category, archive }) {
+function Note({ title, id, content, deleteNote, category, archive, url }) {
     const [isHovered, setIsHovered] = useState(false)
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
@@ -33,7 +33,7 @@ function Note({ title, id, content, deleteNote, category, archive }) {
             categoryId: selectedCategory === 0 ? null : selectedCategory,
             archive: archived
         }
-        await fetch(`http://localhost:3000/api/notes/${id}`, {
+        await fetch(`${url}/${id}`, {
             method: 'PUT',
             mode: 'cors',
             body: JSON.stringify(updateNote),
@@ -54,7 +54,7 @@ function Note({ title, id, content, deleteNote, category, archive }) {
         }
 
         try {
-            await fetch(`http://localhost:3000/api/notes/${id}`, {
+            await fetch(`${url}/${id}`, {
                 method: 'PUT',
                 mode: 'cors',
                 body: JSON.stringify(updateNote),
