@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# My Note App - Documentación Redmi
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introducción
 
-## Available Scripts
+Bienvenido a la documentación oficial de la aplicación My Note App. Esta
+aplicación te permite gestionar tus notas de manera eficiente, proporcionando
+características como la creación, edición, búsqueda, eliminación y archivo de
+notas. Además, podrás organizar tus notas mediante categorías y acceder a las
+notas archivadas de forma rápida y sencilla.
 
-In the project directory, you can run:
+## Sección "Nota"
 
-### `npm start`
+### Crear Notas
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Para crear una nueva nota, simplemente selecciona la opción "Crear Nota" desde
+la pantalla principal. Ingresa el contenido de tu nota y guarda los cambios.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Editar Notas
 
-### `npm test`
+Puedes modificar el contenido de tus notas en cualquier momento. Abre la nota
+que deseas editar y realiza los cambios necesarios.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Buscar Notas
 
-### `npm run build`
+Utiliza la función de búsqueda para encontrar rápidamente notas por su contenido
+o título. La búsqueda es sensible a mayúsculas y minúsculas.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Eliminar Notas
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Si ya no necesitas una nota, puedes eliminarla fácilmente desde la pantalla de
+detalles de la nota.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Buscador por Título de Nota
 
-### `npm run eject`
+Accede al buscador por título de nota para encontrar rápidamente notas
+específicas. Ingresa el título y la aplicación mostrará resultados coincidentes.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Filtro de Categorías
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Organiza tus notas mediante categorías. Aplica filtros para ver solo las notas
+asociadas a una categoría específica.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Archivar Notas
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Mantén organizadas tus notas archivándolas. Las notas archivadas no se mostrarán
+en la lista principal, pero podrás acceder a ellas desde la sección
+correspondiente.
 
-## Learn More
+## Sección "Categoría"
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Agregar Categoría
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Crea categorías personalizadas para organizar tus notas. Desde la sección
+"Categoría", selecciona la opción "Agregar Categoría" e ingresa el nombre de la
+nueva categoría.
 
-### Code Splitting
+### Eliminar Categoría
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Elimina categorías que ya no necesitas. Ten en cuenta que al eliminar una
+categoría, las notas asociadas a ella no se eliminarán, pero perderán su
+categorización.
 
-### Analyzing the Bundle Size
+### Editar Categoría
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Modifica el nombre de una categoría existente según tus necesidades.
 
-### Making a Progressive Web App
+## Sección "Archivadas"
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Notas Archivadas
 
-### Advanced Configuration
+Visualiza todas tus notas archivadas en esta sección. Puedes acceder a ellas,
+buscar, y realizar modificaciones.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Desarchivar Notas
 
-### Deployment
+Si decides volver a activar una nota archivada, simplemente selecciona la opción
+"Desarchivar" desde la pantalla de detalles de la nota.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Buscar Notas Archivadas
 
-### `npm run build` fails to minify
+Utiliza la función de búsqueda específica para encontrar notas archivadas por su
+contenido o título.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Modificar Notas Archivadas
+
+Realiza cambios en tus notas archivadas según sea necesario. Abre la nota desde
+la sección "Archivadas" y edita el contenido.
+
+¡Gracias por elegir My Note App! Esperamos que disfrutes de una experiencia de
+gestión de notas simple y efectiva. Si tienes alguna pregunta o comentario, no
+dudes en ponerte en contacto con nuestro equipo de soporte. ¡Feliz organización
+de notas!
